@@ -6,6 +6,9 @@ const Grid: React.FC = () => {
 
   return (
     <div style={{
+        position: 'relative',
+    border: '1px solid black',
+    display: 'grid',
       width: `${gridSize * 100}px`,
       height: `${gridSize * 100}px`,
       gridTemplateColumns: `repeat(${gridSize}, 100px)`,
@@ -13,7 +16,7 @@ const Grid: React.FC = () => {
     }}>
       {grid.map((row, rowIndex) => (
         row.map((_, colIndex) => (
-          <div key={`${rowIndex}-${colIndex}`} style={{ border: '1px solid gray' }} />
+          <div key={`${rowIndex}-${colIndex}`} style={{ border: '1px solid grey' }} />
         ))
       ))}
     </div>

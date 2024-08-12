@@ -9,7 +9,10 @@ interface RobotProps {
 const Robot: React.FC<RobotProps> = ({x, y, direction}) => {
     return (
         <div className="robot" style={{
-            top: `${y * 100}px`,
+            border: "1px solid black",
+            position: 'absolute',
+            height: '50px',
+            top: `${y * 100 + 50}px`,
             left: `${x * 100}px`,
             transform: `rotate(${direction === 'NORTH' ? 270 : direction === 'EAST' ? 0 : direction === 'SOUTH' ? 90 : 180}deg)`
         }
