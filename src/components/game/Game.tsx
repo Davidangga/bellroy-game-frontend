@@ -10,9 +10,20 @@ const getRandomPosition = () => ({
   y: Math.floor(Math.random() * 5),
 });
 
+
+const getFinishLine = (startPos: { x: number, y: number }) => {
+    let finishPos;
+    do {
+      finishPos = getRandomPosition();
+    } while (finishPos.x === startPos.x && finishPos.y === startPos.y);
+    return finishPos;
+  };
+
 const Game: React.FC = () => {
   const [position, setPosition] = useState(getRandomPosition());
-  const [direction, setDirection] = useState<Direction>('NORTH');
+  const [finishPos, setFinishPos] = useState(getFinishLine(position));
+  const [direction, setDirection] = useState<Direction>('EAST');
+  const [isFinish, setIsFinish] = useState(false);
 
   const moveForward = () => {
     setPosition((prev) => {
@@ -25,14 +36,6 @@ const Game: React.FC = () => {
     });
   };
 
-  const rotateLeft = () => {
-    setDirection((prev) => directions[(directions.indexOf(prev) + 3) % 4]);
-  };
-
-  const rotateRight = () => {
-    setDirection((prev) => directions[(directions.indexOf(prev) + 1) % 4]);
-  };
-
   const reset = () => {
     setPosition(getRandomPosition());
     setDirection('NORTH');
@@ -40,17 +43,20 @@ const Game: React.FC = () => {
 
   const handleKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
-      case 'ArrowUp':
+      case 'Space':
         moveForward();
         break;
       case 'ArrowLeft':
-        rotateLeft();
+        setDirection("WEST");
         break;
       case 'ArrowRight':
-        rotateRight();
+        setDirection("EAST");
         break;
-      case 'r':
-        reset();
+      case 'ArrowUp':
+        setDirection("NORTH");
+        break;
+    case 'ArrowDown':
+        setDirection("SOUTH");
         break;
       default:
         break;
@@ -70,10 +76,11 @@ const Game: React.FC = () => {
       <Board />
       <Robot x={position.x} y={position.y} direction={direction} />
       <div style={{ marginTop: '20px' }}>
-        <button onClick={moveForward}>Move Forward (↑)</button>
-        <button onClick={rotateLeft}>Rotate Left (←)</button>
-        <button onClick={rotateRight}>Rotate Right (→)</button>
-        <button onClick={reset}>Reset (R)</button>
+        <button onClick={() => setDirection("NORTH")}>↑</button>
+        <button onClick={() => setDirection("WEST")}>←</button>
+        <button onClick={() => setDirection("EAST")}>→</button>
+        <button onClick={() => setDirection("SOUTH")}>↓</button>
+        <button onClick={moveForward}>Space</button>
       </div>
     </div>
   );

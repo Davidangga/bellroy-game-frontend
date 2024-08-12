@@ -1,5 +1,5 @@
 import React from "react";
-
+import robotImg from "../../assets/robot.svg";
 interface RobotProps {
     x: number;
     y: number;
@@ -11,10 +11,10 @@ const Robot: React.FC<RobotProps> = ({x, y, direction}) => {
         <div className="robot" style={{
             top: `${y * 100}px`,
             left: `${x * 100}px`,
-            transform: `rotate(${direction === 'NORTH' ? 0 : direction === 'EAST' ? 90 : direction === 'SOUTH' ? 180 : 270}deg)`
+            transform: `rotate(${direction === 'NORTH' ? 270 : direction === 'EAST' ? 0 : direction === 'SOUTH' ? 90 : 180}deg)`
         }
         }>
-            <img className="robot-img" src="./../../assets/robot.svg" alt="bellroy robot"/>
+            <img className="robot-img" src={robotImg} alt="bellroy robot"/>
         </div>
     )
 }
