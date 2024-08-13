@@ -1,6 +1,21 @@
 import React from 'react';
+import Robot from '../robot/Robot';
+import Bell from '../bell/Bell';
 
-const Grid: React.FC = () => {
+interface BoardProps {
+    robotPos : {
+        x: number;
+        y: number;
+    };
+    bellPos : {
+        x: number;
+        y: number;
+    };
+    direction : string;
+
+}
+
+const Grid: React.FC<BoardProps> = ({robotPos, bellPos, direction}) => {
   const gridSize = 5;
   const grid : null[][] = Array(gridSize).fill(Array(gridSize).fill(null));
 
@@ -19,6 +34,8 @@ const Grid: React.FC = () => {
           <div key={`${rowIndex}-${colIndex}`} style={{ border: '1px solid grey' }} />
         ))
       ))}
+      <Robot x={robotPos.x} y={robotPos.y} direction={direction} />
+      <Bell x={bellPos.x} y={bellPos.y} />
     </div>
   );
 };
