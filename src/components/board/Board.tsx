@@ -22,7 +22,6 @@ const Grid: React.FC<BoardProps> = ({robotPos, bellPos, direction}) => {
   return (
     <div style={{
         position: 'relative',
-    border: '1px solid black',
     display: 'grid',
       width: `${gridSize * 100}px`,
       height: `${gridSize * 100}px`,
@@ -31,7 +30,7 @@ const Grid: React.FC<BoardProps> = ({robotPos, bellPos, direction}) => {
     }}>
       {grid.map((row, rowIndex) => (
         row.map((_, colIndex) => (
-          <div key={`${rowIndex}-${colIndex}`} style={{ border: '1px solid grey' }} />
+          <div key={`${rowIndex}-${colIndex}`} style={{ border: '2px solid black', borderRadius: "15px", margin: "2px"}} />
         ))
       ))}
       <Robot x={robotPos.x} y={robotPos.y} direction={direction} />

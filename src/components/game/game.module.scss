@@ -1,0 +1,99 @@
+.gamePage{
+    padding: 0 30px;
+    max-width: 1600px; // desktop viewport
+    height: 100vh; // desktop viewport
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    nav {
+        img{
+            width: 8%;
+        }
+    }
+}
+
+.content{
+    font-family: var(--primary-font);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p{
+        width: 30%;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        text-align: center;
+        span{
+            font-weight: 700;
+            color: #E15A1D;
+        }
+    }
+}
+
+.controlPanel{
+    position: absolute;
+    left: 5%;
+    top: 40%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    width: 300px;
+    p{
+        font-weight: 500;
+        color: #E15A1D;
+        grid-row-start: 1;
+        width: 100%;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        text-align: center;
+        position: relative;
+        top: 20px;
+    }
+}
+
+.controlPanel button{
+    padding: 10px 20px;
+    margin: 5px 5px;
+    font-weight: 500;
+    font-size: 1.2rem;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    cursor: pointer;
+    &:nth-child(2){
+        grid-column-start: 2;
+        grid-row-start: 2;
+    }
+    &:nth-child(3){
+        grid-column-start: 1;
+        grid-row-start: 3;
+    }
+    &:nth-child(4){
+        grid-column-start: 3;
+        grid-row-start: 3;
+    }
+    &:nth-child(5){
+        grid-column-start: 2;
+        grid-row-start: 3;
+    }
+    &:nth-child(6){
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 4;
+    }
+    &:active{
+        background-color: #E89672;
+    }
+}
+
+.count{
+    font-weight: 500;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 0 20px;
+}
+
+

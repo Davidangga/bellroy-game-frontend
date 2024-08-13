@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Robot from "../robot/Robot";
 import Board from "../board/Board";
-import Bell from "../bell/Bell";
 import bellroypng from "../../assets/bellroy.png";
+import packagepng from "../../assets/package.svg";
+import { useNavigate } from "react-router-dom";
+import styles from "./game.module.scss";
 
 const directions = ["NORTH", "EAST", "SOUTH", "WEST"] as const;
 type Direction = (typeof directions)[number];
@@ -26,7 +27,7 @@ const Game: React.FC = () => {
   const [direction, setDirection] = useState<Direction>("EAST");
   const [count, setCount] = useState(0);
   const [activeBtn, setActiveBtn] = useState<Direction | null | "Space">(null);
-
+  const navigate = useNavigate();
   const resetPos = () => {
     setPosition(getRandomPosition());
     setFinishPos(getFinishLine(position));
@@ -55,6 +56,7 @@ const Game: React.FC = () => {
   const handleKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
       case " ":
+        event.preventDefault();
         moveForward();
         setActiveBtn("Space");
         break;
@@ -91,38 +93,60 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     if (activeBtn) {
-        const timeout = setTimeout(() => setActiveBtn(null), 200);
-        return () => clearTimeout(timeout);
+      const timeout = setTimeout(() => setActiveBtn(null), 200);
+      return () => clearTimeout(timeout);
     }
   }, [activeBtn]);
 
   return (
-    <div>
-        <nav>
-            <img className="homelink" src={bellroypng} alt="bellroy icon" />
-        </nav>
-      <p>
-        <span>Hint: </span>Use keyboard or control panel to move Roy to bell the
-        next door.
-      </p>
-      <p>Number package delivered: {count}</p>
-      <Board robotPos={position} bellPos={finishPos} direction={direction}/>
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={() => setDirection("NORTH")}
-        style={{backgroundColor: activeBtn === "NORTH" ? "#E89672" : ""}}
-        >↑</button>
-        <button onClick={() => setDirection("WEST")}
-        style={{backgroundColor: activeBtn === "WEST" ? "#E89672" : ""}}
-        >←</button>
-        <button onClick={() => setDirection("EAST")}
-        style={{backgroundColor: activeBtn === "EAST" ? "#E89672" : ""}}
-        >→</button>
-        <button onClick={() => setDirection("SOUTH")}
-        style={{backgroundColor: activeBtn === "SOUTH" ? "#E89672" : ""}}
-        >↓</button>
-        <button onClick={moveForward}
-        style={{backgroundColor: activeBtn === "Space" ? "#E89672" : ""}}
-        >Space</button>
+    <div className={styles.gamePage}>
+      <nav>
+        <img className={styles.homelink} src={bellroypng} alt="bellroy icon" onClick={() => navigate("/")}/>
+      </nav>
+      <div className={styles.content}>
+        <p>
+            <span>Hint: </span>Use keyboard or control panel to move Roy, delivered
+            as many packages possible.
+        </p>
+
+        <Board robotPos={position} bellPos={finishPos} direction={direction} />
+
+        <div className={styles.controlPanel}>
+            <p>Game Controls</p>
+            <button
+            onClick={() => setDirection("NORTH")}
+            style={{ backgroundColor: activeBtn === "NORTH" ? "#E89672" : "" }}
+            >
+            ↑
+            </button>
+            <button
+            onClick={() => setDirection("WEST")}
+            style={{ backgroundColor: activeBtn === "WEST" ? "#E89672" : "" }}
+            >
+            ←
+            </button>
+            <button
+            onClick={() => setDirection("EAST")}
+            style={{ backgroundColor: activeBtn === "EAST" ? "#E89672" : "" }}
+            >
+            →
+            </button>
+            <button
+            onClick={() => setDirection("SOUTH")}
+            style={{ backgroundColor: activeBtn === "SOUTH" ? "#E89672" : "" }}
+            >
+            ↓
+            </button>
+            <button
+            onClick={moveForward}
+            style={{ backgroundColor: activeBtn === "Space" ? "#E89672" : "" }}
+            >
+            Space
+            </button>
+        </div>
+        <div className={styles.count}>
+            <img src={packagepng} alt="package"/> Delivered: {count}
+        </div>
       </div>
     </div>
   );

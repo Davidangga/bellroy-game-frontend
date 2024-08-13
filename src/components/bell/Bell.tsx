@@ -9,9 +9,8 @@ const Bell: React.FC<BellProps> = ({x, y}) => {
     return (
         <div className="robot" style={{
             position: 'absolute',
-            height: '50px',
-            top: `${y * 100 + 50}px`,
-            left: `${x * 100}px`
+            top: `${y * 100 + 20}px`,
+            left: `${x * 100 + 20}px`
         }
         }>
             <img className="bell-img" src={bellImg} alt="bellroy destination"/>

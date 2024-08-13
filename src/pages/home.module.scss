@@ -1,0 +1,66 @@
+.homePage{
+    padding: 0 30px;
+    max-width: 1600px; // desktop viewport
+    height: 100vh; // desktop viewport
+    background-image: url("./../assets/background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    nav {
+        img{
+            width: 8%;
+        }
+    }
+}
+
+.content{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    .homeLeftSide{
+        padding-left: 30px;
+        img{
+            width: 600px;
+        }
+    }
+    .homeRightSide{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 40%;
+        h1{
+            font-family: var(--primary-font);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            span{
+                color: #E15A1D;
+            }
+        }
+        p{
+            font-size: 1.1rem;
+            font-family: var(--secondary-font);
+            margin-bottom: 30px;
+            width: 80%;
+        }
+        .gamelink{
+            text-align: center;
+            border: none;
+            font-weight: 500;
+            font-family: var(--secondary-font);
+            background-color: transparent;
+            font-size: 1.3rem;
+            width: fit-content;
+            cursor: pointer;
+            transition: all 0.2s;
+            img{
+                transform: translate(10px, 10px);
+            }
+            &:hover{
+                color: #E15A1D;
+            }
+        }
+
+    }
+}
+
+
